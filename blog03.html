@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Typography & Readability — Choosing Fonts That Feel Right</title>
+  <meta name="description" content="A guide to choosing fonts that combine readability and personality using expressive cursive and modern typography." />
+  
+  <!-- Google Fonts: Dancing Script (Cursive), Poppins (Body), Fira Code (Code) -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(180deg, #0d1117, #111);
+      --text: #f8f8f8;
+      --muted: #a0a0a0;
+      --accent: #ffb6b9;
+      --accent-2: #ffdf6c;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --border: rgba(255, 255, 255, 0.08);
+      --max-width: 920px;
+    }
+
+    /* Base setup */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Headings in cursive */
+    h1, h2, h3 {
+      font-family: 'Dancing Script', cursive;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: var(--accent-2);
+      font-size: 1.8rem;
+      margin: 28px 0 10px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 28px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    p {
+      margin-bottom: 14px;
+      font-size: 1.05rem;
+    }
+
+    ul {
+      margin: 12px 0 18px 24px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      font-size: 1.02rem;
+    }
+
+    code, pre {
+      font-family: 'Fira Code', monospace;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+    }
+
+    code {
+      padding: 3px 6px;
+      color: #ffe599;
+    }
+
+    pre {
+      padding: 12px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+      color: #fff6da;
+      margin-bottom: 14px;
+    }
+
+    .note {
+      background: linear-gradient(90deg, rgba(255,182,185,0.08), rgba(255,223,108,0.05));
+      border-left: 4px solid var(--accent);
+      padding: 12px 14px;
+      border-radius: 10px;
+      color: var(--muted);
+      margin: 14px 0;
+      font-size: 0.96rem;
+    }
+
+    footer {
+      margin-top: 30px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.95rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 14px;
+    }
+
+    @media (max-width: 720px) {
+      body { padding: 20px; }
+      .container { padding: 24px; }
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <header>
+      <h1>Typography & Readability</h1>
+      <p class="subtitle">Choosing & blending between fonts that *feel* right — balancing elegance with clarity </p>
+    </header>
+
+    <article>
+      <p>
+        Typography is more than just selecting fonts — it’s about creating an emotional voice for your content.
+        Fonts communicate personality before a single word is read. The right pairing of typefaces can make your design feel calm, exciting, luxurious, or minimal.
+      </p>
+
+      <h2>1. Let the font express your tone</h2>
+      <p>
+        Cursive fonts like <strong>Dancing Script</strong> or <strong>Pacifico</strong> convey warmth, friendliness, and creativity.
+        They are great for titles, headers, or quotes. But when used for long paragraphs, they can reduce readability — that’s where a balanced sans-serif like <strong>Poppins</strong> comes in.
+      </p>
+
+      <ul>
+        <li><strong>Cursive (expressive):</strong> best for emotion, titles, and personality.</li>
+        <li><strong>Sans-serif (neutral):</strong> ideal for clarity, readability, and modern layouts.</li>
+        <li><strong>Pair wisely:</strong> combine a decorative font with a minimal one.</li>
+      </ul>
+
+      <div class="note">
+        💡 <strong>Tip:</strong> Use cursive fonts for *impact*, not *information*. 
+      </div>
+
+      <h2>2. Perfect pairing: cursive + modern sans-serif</h2>
+      <p>
+        Pair a cursive font for headings with a clean sans-serif for the body text. This contrast
+        adds character without sacrificing readability.
+      </p>
+
+      <pre><code>/* Example Font Pairing */
+h1, h2, h3 {
+  font-family: 'Dancing Script', cursive;
+  color: #ffb6b9;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #f8f8f8;
+  background: #0d1117;
+}</code></pre>
+
+      <h2>3. Readability rules to remember</h2>
+      <ul>
+        <li>Keep cursive fonts above 20px for clarity.</li>
+        <li>Use limited weights (400–700) to maintain style consistency.</li>
+        <li>Pair fonts with matching emotion — avoid mixing playful with corporate.</li>
+        <li>Maintain high contrast between text and background.</li>
+      </ul>
+
+      <h2>4. Font combinations that work beautifully</h2>
+      <ul>
+        <li><strong>Dancing Script</strong> + <strong>Poppins</strong> → Artistic + Clean (used here!)</li>
+        <li><strong>Pacifico</strong> + <strong>Open Sans</strong> → Friendly + Readable</li>
+        <li><strong>Great Vibes</strong> + <strong>Lato</strong> → Elegant + Professional</li>
+        <li><strong>Sacramento</strong> + <strong>Montserrat</strong> → Personal + Bold</li>
+      </ul>
+
+      <h2>5. A note on personality</h2>
+      <p>
+        Fonts set the *mood* of your brand. A flowing cursive can make your design feel personal and handcrafted,
+        while a geometric sans-serif makes it feel futuristic and clean. The balance between emotion and structure
+        is what defines your visual voice.
+      </p>
+
+      
+
+      <footer>
+        <p>Written by <strong>Milap</strong> • November 9, 2024</p>
+        <p>“Good typography doesn’t just say words — it feels like music.”</p>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>
