@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Using Particles.js to Add Stunning Backgrounds — My Tech Blog</title>
+  <meta name="description" content="A practical guide to using Particles.js to add interactive particle backgrounds to your website, with setup, configuration, tips, and examples." />
+  <link rel="icon" href="" />
+  <!-- Google font (optional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ---------- Base & Layout ---------- */
+    :root{
+      --bg:#0d0d0d;
+      --card-bg: rgba(255,255,255,0.06);
+      --accent:#00bcd4;
+      --muted:#cfcfcf;
+      --accent-2:#ffeb3b;
+      --max-width:980px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: "Poppins", system-ui, Arial, sans-serif;
+      background: var(--bg);
+      color:#eaeaea;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.6;
+      padding:40px 20px;
+    }
+
+    /* Particle canvas container */
+    #particles-js{
+      position:fixed;
+      inset:0;
+      z-index:-2;
+      background: var(--bg);
+    }
+    /* subtle gradient overlay for depth */
+    .bg-overlay{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      background: linear-gradient(180deg, rgba(13,71,161,0.12), rgba(0,0,0,0.6));
+      pointer-events:none;
+    }
+
+    /* Main card */
+    .page {
+      max-width: var(--max-width);
+      margin: 48px auto;
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 36px;
+      box-shadow: 0 10px 40px rgba(2,6,23,0.6);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    header.meta{
+      text-align:center;
+      margin-bottom: 28px;
+    }
+    header .title{
+      color: var(--accent);
+      font-size: 2.4rem;
+      margin-bottom:6px;
+      font-weight:700;
+    }
+    header .subtitle{
+      color:var(--muted);
+      font-size:1rem;
+    }
+
+    .post-meta{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      color:var(--muted);
+      margin-top:10px;
+      font-size:0.95rem;
+    }
+    .post-meta time{opacity:0.95}
+
+    article.blog {
+      margin-top:22px;
+    }
+    article.blog h2{
+      color:var(--accent-2);
+      font-size:1.4rem;
+      margin: 18px 0 10px;
+    }
+    article.blog p{color:#e0e0e0;margin-bottom:14px}
+    article.blog ul{margin-left:1.1rem;margin-bottom:14px}
+    article.blog code{
+      background: rgba(0,0,0,0.45);
+      padding:6px 8px;
+      border-radius:6px;
+      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+      font-size:0.95rem;
+    }
+    pre code{
+      display:block;
+      padding:14px;
+      overflow:auto;
+      border-radius:8px;
+      background: rgba(0,0,0,0.45);
+      margin-bottom:14px;
+      font-size:0.92rem;
+    }
+
+    .note{
+      background: linear-gradient(90deg, rgba(0,188,212,0.08), rgba(255,235,59,0.03));
+      border-left:4px solid var(--accent);
+      padding:12px 14px;
+      border-radius:8px;
+      color:var(--muted);
+      margin:14px 0;
+    }
+
+    footer.credits{
+      margin-top:26px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:0.92rem;
+    }
+
+    .btn {
+      display:inline-block;
+      background:transparent;
+      color:var(--accent);
+      border:1px solid rgba(0,188,212,0.18);
+      padding:8px 12px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:600;
+      transition:all .18s ease;
+    }
+    .btn:hover{transform:translateY(-3px); box-shadow:0 6px 18px rgba(0,188,212,0.06)}
+    @media (max-width:720px){
+      body{padding:20px}
+      .page{padding:22px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Particle background container -->
+  <div id="particles-js"></div>
+  <div class="bg-overlay" aria-hidden="true"></div>
+
+  <main class="page" role="main">
+    <header class="meta">
+      <div class="title">Using <span style="opacity:0.95">Particles.js</span> to Add Stunning Interactive Backgrounds</div>
+      <div class="subtitle">You can just add lightweight cool particle animations to your web pages!</div>
+      <div class="post-meta" aria-hidden="false">
+        <span>By <strong>Milap</strong></span>
+        <time datetime="2025-10-09">August 21, 2024</time>
+        <span>• <span title="Reading time">5 min read</span></span>
+      </div>
+    </header>
+
+    <article class="blog" aria-labelledby="post-title">
+      <h2 id="post-title">What is Particles.js?</h2>
+      <p>
+        <strong>Particles.js</strong> is a lightweight JavaScript library that creates animated particle systems
+        (dots, lines, bubbles, etc.) using the HTML5 <code>&lt;canvas&gt;</code> element.
+        It is often used to create subtle — or bold — interactive backgrounds for landing pages, portfolios, and hero sections.
+      </p>
+
+      <h2>Why use it on a blog?</h2>
+      <ul>
+        <li>It adds a modern, dynamic feel without changing your content layout.</li>
+        <li>It’s easy to configure with a JSON file — no heavy animation knowledge required.</li>
+        <li>Works well as a background layer behind readable content when you add a translucent card.</li>
+      </ul>
+
+      <h2>Quick setup — files you need</h2>
+      <p>Minimal project structure (static site):</p>
+      <pre><code>/
+├─ index.html
+├─ style.css
+├─ script.js
+└─ particles.json
+</code></pre>
+
+      <h2>Include the library</h2>
+      <p>For a simple static page, use the CDN in your HTML before your script:</p>
+      <pre><code>&lt;script src="https://cdn.jsdelivr.net/npm/particles.js"&gt;&lt;/script&gt;
+&lt;script src="script.js"&gt;&lt;/script&gt;
+</code></pre>
+
+      <h2>particles.json — sample config</h2>
+      <p>Place this next to your HTML and load it via <code>particlesJS.load()</code> (this file controls how the particles behave):</p>
+      <pre><code>{
+  "particles": {
+    "number": { "value": 80 },
+    "color": { "value": "#00bcd4" },
+    "shape": { "type": "circle" },
+    "opacity": { "value": 0.5 },
+    "size": { "value": 3 },
+    "line_linked": {
+      "enable": true,
+      "distance": 150,
+      "color": "#00bcd4",
+      "opacity": 0.4,
+      "width": 1
+    },
+    "move": { "enable": true, "speed": 3 }
+  },
+  "interactivity": {
+    "events": {
+      "onhover": { "enable": true, "mode": "repulse" },
+      "onclick": { "enable": true, "mode": "push" }
+    }
+  },
+  "retina_detect": true
+}
+</code></pre>
+
+      <h2>Initialize in JavaScript</h2>
+      <p>Create <code>script.js</code> and load the config:</p>
+      <pre><code>particlesJS.load('particles-js', 'particles.json', function() {
+  console.log('Particles.js loaded.');
+});</code></pre>
+
+      <div class="note">
+        <strong>Tip:</strong> If you open the HTML directly using <code>file://</code> in some browsers, the JSON may fail to load due to CORS. Use Live Server or a simple local http server (Python's <code>python -m http.server</code>) instead.
+      </div>
+
+      <h2>Design & accessibility tips</h2>
+      <ul>
+        <li><strong>Keep contrast high</strong> — place text inside a translucent card or overlay so readability stays strong.</li>
+        <li><strong>Performance</strong> — reduce the particle count on mobile or disable interactivity for smaller screens.</li>
+        <li><strong>Respect motion preferences</strong> — consider turning off particle motion when <code>prefers-reduced-motion</code> is set.</li>
+      </ul>
+
+      <h2>Example: disable on small screens</h2>
+      <pre><code>if (window.matchMedia('(max-width: 720px)').matches) {
+  // either load a lighter config or skip initializing particles
+}</code></pre>
+
+      <h2>Customization ideas</h2>
+      <ul>
+        <li>Change particle shapes (triangle, polygon or image) for branding.</li>
+        <li>Sync particle color with your site accent color for a cohesive look.</li>
+        <li>Use the <em>repulse</em> mode for mouse hover, or <em>grab</em> to create a connecting lines effect.</li>
+      </ul>
+
+      <h2>Alternatives & when to choose them</h2>
+      <p>
+        If you need advanced features, 3D particles, or more active maintenance, consider:
+      </p>
+      <ul>
+        <li><strong>tsparticles</strong> — modern fork with support for frameworks (React, Vue, Angular) and more features.</li>
+        <li><strong>Three.js</strong> — for WebGL-powered 3D particle systems (higher learning curve).</li>
+      </ul>
+
+      <h2>Final checklist before publishing</h2>
+      <ul>
+        <li>Test performance on low-end devices and reduce particle count if needed.</li>
+        <li>Verify readability and accessible contrast across sections.</li>
+        <li>Ensure JSON loads correctly from your hosting environment (no CORS issues).</li>
+      </ul>
+
+      <p>Ready to start? Copy the example files into your VS Code project, run a local server (Live Server recommended), and tweak the <code>particles.json</code> values until you hit a look that matches your brand.</p>
+
+      <footer class="credits">
+        <span>Hope you enjoyed this guide? You can also customize the <code>color</code>, <code>size</code>, and <code>move.speed</code> in <code>particles.json</code>!</span>
+        <div>
+          <a class="btn" href="#" onclick="copySnippet()">Copy setup snippet</a>
+          <a class="btn" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to top</a>
+        </div>
+      </footer>
+    </article>
+  </main>
+
+  <!-- Particles.js CDN and init script -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <script>
+    // Default initialization - expects particles.json in same folder
+    if (typeof particlesJS !== 'undefined') {
+      // Respect prefers-reduced-motion
+      const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduceMotion) {
+        particlesJS.load('particles-js', 'particles.json', function() {
+          console.log('Particles.js loaded.');
+        });
+      } else {
+        console.log('User prefers reduced motion — skipping particles.');
+      }
+    } else {
+      console.warn('particlesJS not found. Check CDN or include library.');
+    }
+
+    // small helper for demo button
+    function copySnippet() {
+      const snippet = `particlesJS.load('particles-js', 'particles.json', function() { console.log('Particles.js loaded.'); });`;
+      navigator.clipboard?.writeText(snippet).then(()=> {
+        alert('Snippet copied to clipboard!');
+      }, ()=> alert('Could not copy. Try selecting the snippet manually.'));
+    }
+  </script>
+</body>
+</html>
